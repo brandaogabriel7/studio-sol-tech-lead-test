@@ -1,3 +1,7 @@
+using Brands.StudioSol.TechLeadTest.GraphQL;
+using Brands.StudioSol.TechLeadTest.Services;
+using Brands.StudioSol.TechLeadTest.Services.Interfaces;
+using GraphQL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +22,14 @@ namespace Brands.StudioSol.TechLeadTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            // setup GraphQL
+            services.AddGraphQL(builder => builder
+                .AddSchema<RomanNumbersSchema>()
+                .AddGraphTypes(typeof(RomanNumbersSchema).Assembly)
+                .AddSystemTextJson());
+
+            // Inject services
+            services.AddSingleton<IRomanNumbersService, RomanNumbersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,17 +40,15 @@ namespace Brands.StudioSol.TechLeadTest
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseGraphQLAltair();
-
+            app.UseWebSockets();
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapGraphQL();
+                endpoints.MapGraphQLAltair();
             });
         }
     }

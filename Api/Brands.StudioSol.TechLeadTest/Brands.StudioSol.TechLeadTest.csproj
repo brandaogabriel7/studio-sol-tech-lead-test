@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GraphQL" Version="7.0.2" />
-    <PackageReference Include="GraphQL.Server.Ui.Altair" Version="7.1.1" />
-    <PackageReference Include="GraphQL.SystemTextJson" Version="7.0.2" />
+	<PackageReference Include="GraphQL.Server.All" Version="7.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Brands.StudioSol.TechLeadTest.GraphQL\Brands.StudioSol.TechLeadTest.GraphQL.csproj" />
   </ItemGroup>
 
 
