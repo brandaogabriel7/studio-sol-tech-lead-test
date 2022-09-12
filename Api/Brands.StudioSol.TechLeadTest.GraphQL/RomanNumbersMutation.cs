@@ -15,7 +15,7 @@ namespace Brands.StudioSol.TechLeadTest.GraphQL
 
             Field<RomanNumberType>("search")
                 .Argument<NonNullGraphType<StringGraphType>>(TEXT_ARGUMENT_NAME)
-                .Resolve(context => romanNumbersService.GetLowestRomanNumber(context.GetArgument<string>(TEXT_ARGUMENT_NAME)));
+                .Resolve(context => romanNumbersService.GetLowestPrimeRomanNumber(context.GetArgument<string>(TEXT_ARGUMENT_NAME)));
         }
     }
 }

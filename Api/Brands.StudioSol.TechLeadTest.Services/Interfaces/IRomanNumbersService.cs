@@ -4,6 +4,6 @@ namespace Brands.StudioSol.TechLeadTest.Services.Interfaces
 {
     public interface IRomanNumbersService
     {
-        RomanNumber GetLowestRomanNumber(string text);
+        RomanNumber GetLowestPrimeRomanNumber(string searchText);
     }
 }
