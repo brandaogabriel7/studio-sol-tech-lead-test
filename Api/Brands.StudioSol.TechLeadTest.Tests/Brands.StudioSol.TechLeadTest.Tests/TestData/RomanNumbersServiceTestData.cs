@@ -25,29 +25,23 @@ namespace Brands.StudioSol.TechLeadTest.Tests.TestData
                 Number = "I",
                 Value = 1
             }),
-            ("IVONE",
+            ("IVONEVII",
             new RomanNumber
             {
-                Number = "IV",
-                Value = 4
+                Number = "VII",
+                Value = 7
             }),
-            ("MEU",
+            ("MEUXIIIOO",
             new RomanNumber
             {
-                Number = "M",
-                Value = 1000
+                Number = "XIII",
+                Value = 13
             }),
             ("HAHAHAXLVIIOPAAAAA",
             new RomanNumber
             {
                 Number = "XLVII",
                 Value = 47
-            }),
-            ("DIIIAS",
-            new RomanNumber
-            {
-                Number = "DIII",
-                Value = 503
             })
         };
 
