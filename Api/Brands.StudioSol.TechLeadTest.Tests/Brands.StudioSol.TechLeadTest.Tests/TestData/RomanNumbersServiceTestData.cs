@@ -13,17 +13,17 @@ namespace Brands.StudioSol.TechLeadTest.Tests.TestData
                 Number = "XI",
                 Value = 11
             }),
-            ("BATATAI",
+            ("BATATAII",
             new RomanNumber
             {
-                Number = "I",
-                Value = 1
+                Number = "II",
+                Value = 2
             }),
-            ("PARALELEPIPEDO",
+            ("PARALELEPIIIPEDO",
             new RomanNumber
             {
-                Number = "I",
-                Value = 1
+                Number = "III",
+                Value = 3
             }),
             ("IVONEVII",
             new RomanNumber
