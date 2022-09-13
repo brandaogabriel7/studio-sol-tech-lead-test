@@ -18,6 +18,8 @@ Para facilitar a execução da aplicação e deploy para algum ambiente, caso de
 
 Além disso, eu criei um pipeline para realizar o build e rodar os testes com todos os Pull Requests que eu subisse, visto que usei o `Git` e o `Github` para controle de versão.
 
+> Outro ponto é que eu desenvolvo com TDD, então meus testes de unidade são um bom norte para entender o que o código faz.
+
 #### **Lista completa:**
 
 - ASP.NET Core
@@ -107,6 +109,12 @@ Entrada: `"HAHAHAXLVIIOPAAAAAIV"`
 
    `{ "number": "IV", "value": 4 }`
 
-### Checando se número é primo
+### Desacoplando o serviço da lógica de números primos
 
 Quando eu terminei essa solução, eu achei que tava tudo pronto. Mas o caso demonstrado no PDF da prova não deu certo (claramente). Aí eu reli o enunciado e percebi que faltou checar por números primos. Esse era o próximo passo.
+
+Eu não tinha certeza de quais eram as melhores formas de checar se um número é primo. Não sabia se era melhor gerar uma coleção de números primos no início da aplicação ou calcular para cada requisição.
+
+Tendo isso em mente, eu injetei uma dependência que ficaria responsável por essa lógica e mockei a chamada dessa dependência para desacoplar meus testes de unidade atuais e testar o restante da lógica. Além disso, dessa forma fica simples de injetar várias versões do algoritmo e fazer vários testes.
+
+Se fosse uma aplicação real, meu código do serviço não ficaria dependende de qual algoritmo eu uso para identificar números primos. Essa implementação poderia ser alterada várias vezes no container de injeção de dependências sem nenhuma alteração no serviço.
