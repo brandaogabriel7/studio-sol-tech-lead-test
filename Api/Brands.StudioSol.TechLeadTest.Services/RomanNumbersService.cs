@@ -1,5 +1,6 @@
 ﻿using Brands.StudioSol.TechLeadTest.Models;
 using Brands.StudioSol.TechLeadTest.Services.Interfaces;
+using Brands.StudioSol.TechLeadTest.Services.PrimeNumber;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -9,10 +10,18 @@ namespace Brands.StudioSol.TechLeadTest.Services
     {
         private const char SPACE = ' ';
 
+        private readonly IPrimeNumberAlgorithm _primeNumberAlgorithm;
+
+        public RomanNumbersService(IPrimeNumberAlgorithm primeNumberAlgorithm)
+        {
+            _primeNumberAlgorithm = primeNumberAlgorithm;
+        }
+
         public RomanNumber GetLowestPrimeRomanNumber(string searchText)
         {
             var numbersInRoman = Regex.Replace(searchText, @"[^IVXLCDM\s]", SPACE.ToString()).Trim().Split(SPACE);
             return numbersInRoman.Select(n => RomanNumbersFactory.Create(n))
+                .Where(rn => _primeNumberAlgorithm.IsPrimeNumber(rn.Value))
                 .Aggregate((lowest, next) => next.Value < lowest.Value ? next : lowest);
         }
     }
