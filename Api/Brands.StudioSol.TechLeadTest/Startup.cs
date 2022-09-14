@@ -1,6 +1,7 @@
 using Brands.StudioSol.TechLeadTest.GraphQL;
 using Brands.StudioSol.TechLeadTest.Services;
 using Brands.StudioSol.TechLeadTest.Services.Interfaces;
+using Brands.StudioSol.TechLeadTest.Services.PrimeNumber;
 using GraphQL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +30,8 @@ namespace Brands.StudioSol.TechLeadTest
                 .AddSystemTextJson());
 
             // Inject services
-            services.AddSingleton<IRomanNumbersService, RomanNumbersService>();
+            services.AddSingleton<IRomanNumbersService, RomanNumbersService>()
+                .AddSingleton<IPrimeNumberAlgorithm, TrialDivisionPrimeNumberAlgorithm>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,7 @@ namespace Brands.StudioSol.TechLeadTest.Tests.TestData
 {
     public static class RomanNumbersServiceTestData
     {
-        public static readonly IEnumerable<(string searchText, RomanNumber lowestRomanNumber)> GetLowestRomanNumberData = new[]
+        private static readonly IEnumerable<(string searchText, RomanNumber lowestRomanNumber)> GetLowestRomanNumberData = new[]
         {
             ("AXIBIV",
             new RomanNumber
@@ -37,7 +37,7 @@ namespace Brands.StudioSol.TechLeadTest.Tests.TestData
                 Number = "XIII",
                 Value = 13
             }),
-            ("HAHAHAXLVIIOPAAAAA",
+            ("HAHAHAXLVIIOPAAAAAIV",
             new RomanNumber
             {
                 Number = "XLVII",

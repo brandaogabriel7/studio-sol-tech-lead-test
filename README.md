@@ -118,3 +118,66 @@ Eu não tinha certeza de quais eram as melhores formas de checar se um número �
 Tendo isso em mente, eu injetei uma dependência que ficaria responsável por essa lógica e mockei a chamada dessa dependência para desacoplar meus testes de unidade atuais e testar o restante da lógica. Além disso, dessa forma fica simples de injetar várias versões do algoritmo e fazer vários testes.
 
 Se fosse uma aplicação real, meu código do serviço não ficaria dependende de qual algoritmo eu uso para identificar números primos. Essa implementação poderia ser alterada várias vezes no container de injeção de dependências sem nenhuma alteração no serviço.
+
+### Implementando função que identifica números primos
+
+Depois de algumas análises, eu decidi que seria mais vantajoso ter uma função que checa se um número é primo em tempo real ao invés de armazenar uma coleção muito grande de números primos. Dependendo do tamanho da coleção, o acesso poderia ser ainda mais custoso para números maiores do que o cálculo. Além disso, poderia ocupar bastante memória.
+
+Tendo isso em mente, eu considerei algumas formas de otimizar o algoritmo, como guardar cache de números primos já calculados, checar se os números são primos em múltiplas threads ou usar algoritmos mais complexos mas que são mais rápidos para identificar se um número é primo.
+
+Contudo, eu já estava gastando muito tempo pensando em cenários de performance ruim sem ter ao menos uma implementação simples. E, como em um caso de uma API real, não faz sentido ser excessivamente minucioso com a performance a não ser que seja uma aplicação crítica ou que já tenha métricas da aplicação funcionando em produção que demonstrem que o código não está performando bem.
+
+Um algoritmo mais simples como "Trial division" usando algumas otimizações menores pode ser mais que o suficiente para o caso. Então resolvi implementá-lo e pensar em outras otimizações caso a performance ficasse insatisfatória nos testes.
+
+Eu li um pouco sobre os algoritmos e otimizações [nesse site](https://cp-algorithms.com/algebra/primality_tests.html) e resolvi seguir com o "Trial division" com algumas otimizações simples mencionadas [nesse artigo](https://cp-algorithms.com/algebra/factorization.html).
+
+> Eu considerei a definição de número primo como sendo um número que é divisível por exatamente 2 números, 1 e ele mesmo. Então o número 1 não foi considerado como um número primo.
+
+### Otimizações do algoritmo
+
+Depois de fazer a primeira implementação, sem otimizações, eu identifiquei pelos meus testes de unidade, que a função é bem rápida. Cada caso de teste levou menos de 1ms. Apenas um dos casos de teste levou 6ms para executar, o do número 550. Uma performance já satisfatória.
+
+```csharp
+public bool IsPrimeNumber(int value)
+{
+   if (value == 1)
+   {
+         return default;
+   }
+
+   for (var divisor = 2; divisor * divisor <= value; divisor++)
+   {
+         if (value % divisor == 0)
+         {
+            return default;
+         }
+   }
+   return true;
+}
+```
+
+Apesar dos resultados satisfatórios, resolvi implementar uma otimização simples usando uma regra que encontrei, chamada 6k+-1. Em resumo, todos os números primos depois do 2 e do 3 seguem a forma de 6n -1. Então, para implementá-la, a minha função pode checar se o número é divisível por 2 ou 3 antes de entrar no laço, e, depois disso, o incremento do laço para passar pelos outros divisores muda para 6, diminuindo bastante o número de iterações.
+
+```csharp
+public bool IsPrimeNumber(int value)
+{
+   if (value == 2 || value == 3)
+   {
+         return true;
+   }
+
+   if (value <= 1 || value % 2 == 0 || value % 3 == 0)
+   {
+         return default;
+   }
+
+   for (var divisor = 5; divisor * divisor <= value; divisor += 6)
+   {
+         if (value % divisor == 0)
+         {
+            return default;
+         }
+   }
+   return true;
+}
+```
