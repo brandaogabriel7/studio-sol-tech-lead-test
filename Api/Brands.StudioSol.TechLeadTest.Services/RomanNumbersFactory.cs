@@ -17,9 +17,13 @@ namespace Brands.StudioSol.TechLeadTest.Services
             ['M'] = 1000
         };
 
+        /// <summary>
+        /// Creates a <see cref="RomanNumber"/> from a string that contains a roman number.
+        /// </summary>
         public static RomanNumber Create(string number)
         {
-            var decomposedNumbers = number.Select(c => _mapping[c]).ToArray();
+            var decomposedNumbers = GetDecomposedNumbers(number);
+
             var value = default(int);
             var previous = default(int);
             for (var index = decomposedNumbers.Length - 1; index >= default(int); index--)
@@ -40,6 +44,16 @@ namespace Brands.StudioSol.TechLeadTest.Services
                 Number = number,
                 Value = value
             };
+        }
+
+        /// <summary>
+        /// Replaces the roman digits for their numeric values.
+        /// </summary>
+        /// <param name="number">The roman number to decompose.</param>
+        /// <returns>A collection with the numeric values for each digit of the roman number.</returns>
+        private static int[] GetDecomposedNumbers(string number)
+        {
+            return number.Select(c => _mapping[c]).ToArray();
         }
     }
 }

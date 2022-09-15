@@ -28,6 +28,7 @@ Além disso, eu criei um pipeline para realizar o build e rodar os testes com to
 - Github e Github Actions
 - xunit, FluentAssertions e NSubstitute
 - graphql-dotnet/server com Altair UI
+- Heroku e Cloudflare
 
 > Alguns dos itens foram decididos em etapas posteriores mas já estão na lista completa, acima.
 
@@ -180,4 +181,26 @@ public bool IsPrimeNumber(int value)
    }
    return true;
 }
+```
+
+## Execução
+
+O projeto está hospedado como um container no Heroku. [Clique aqui](https://studio-sol-tech-lead-test.gabrielbrandao.net/ui/altair) para abrir a UI e fazer os testes.
+
+Caso prefira executar a aplicação na própria máquina, você tem as seguintes opções:
+
+- Executar com o SDK do .NET Core 3.1 na sua máquina
+
+- Utilizar um container (mais simples se não tiver ambiente .NET já configurado)
+
+```bash
+# Navegue até a pasta Api no projeto
+cd Api
+
+# Construa a imagem
+docker build -t studio-sol-test .
+
+# Suba o container
+# A variável de ambiente PORT precisa ser especificada porque a Dockerfile foi construída para funcionar com o Heroku, onde foi feito o deploy.
+docker run -d -e PORT=80 -p 8080:80 --name studio-sol-test studio-sol-test
 ```
