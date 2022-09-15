@@ -1,9 +1,13 @@
-﻿using Brands.StudioSol.TechLeadTest.Services.PrimeNumber;
+﻿using Brands.StudioSol.TechLeadTest.Services.Interfaces;
 
-namespace Brands.StudioSol.TechLeadTest.Services
+namespace Brands.StudioSol.TechLeadTest.Services.PrimeNumber
 {
     public class TrialDivisionPrimeNumberAlgorithm : IPrimeNumberAlgorithm
     {
+        /// <inheritdoc/>
+        /// <remarks>
+        /// This algorithm is called Trial Division and it is using the 6k+-1 rule to optimize the loop.
+        /// </remarks>
         public bool IsPrimeNumber(int value)
         {
             if (value == 2 || value == 3)
