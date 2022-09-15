@@ -1,6 +1,6 @@
 using Brands.StudioSol.TechLeadTest.Models;
 using Brands.StudioSol.TechLeadTest.Services;
-using Brands.StudioSol.TechLeadTest.Services.PrimeNumber;
+using Brands.StudioSol.TechLeadTest.Services.Interfaces;
 using Brands.StudioSol.TechLeadTest.Tests.TestData;
 using FluentAssertions;
 using NSubstitute;

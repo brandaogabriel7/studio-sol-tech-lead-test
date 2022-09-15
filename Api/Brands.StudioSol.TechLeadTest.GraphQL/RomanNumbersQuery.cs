@@ -3,10 +3,10 @@ using GraphQL.Types;
 
 namespace Brands.StudioSol.TechLeadTest.GraphQL
 {
-    /// <summary>
+    /// <remarks>
     /// For some reason, GraphQL breaks when the Query is empty, so I implemented this hello
     /// query to make it work.
-    /// </summary>
+    /// </remarks>
     public class RomanNumbersQuery : ObjectGraphType
     {
         private const string NAME_QUERY_ARGUMENT = "name";

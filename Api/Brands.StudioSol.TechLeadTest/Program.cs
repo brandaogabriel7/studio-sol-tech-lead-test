@@ -13,6 +13,9 @@ namespace Brands.StudioSol.TechLeadTest
             CreateHostBuilder(args).Build().Run();
         }
 
+        /// <remarks>
+        /// The API is being deployed to Heroku as a container, so the port is specified by Heroku via environment variable PORT.
+        /// </remarks>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
