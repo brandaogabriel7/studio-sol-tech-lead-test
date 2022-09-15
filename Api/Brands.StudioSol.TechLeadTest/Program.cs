@@ -18,7 +18,7 @@ namespace Brands.StudioSol.TechLeadTest
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls($"https://*.:{Environment.GetEnvironmentVariable(PORT_ENVIRONMENT_VARIABLE)}");
+                    webBuilder.UseUrls($"http://*.:{Environment.GetEnvironmentVariable(PORT_ENVIRONMENT_VARIABLE)}");
                 });
     }
 }
